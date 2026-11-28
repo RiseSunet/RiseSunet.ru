@@ -1,9 +1,0 @@
-# Отключаем служебный HTML-комментарий и HUD-скрипт Netlify на всех страницах,
-# чтобы убрать лишний запрос к /.netlify/scripts/hud и ускорить загрузку.
-/*
-  X-Netlify-Hud: disable
-  Netlify-Hud: disable
-
-# Отдаём файл подтверждения Яндекса как текст (без HTML-инъекций Netlify).
-/yandex_7e64387bb9be3053.html
-  Content-Type: text/plain; charset=UTF-8

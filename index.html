@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-ru="Глюбин — браузерные игры" data-en="Glubin — browser games">Глюбин — браузерные игры</title>
+<meta name="description" content="Браузерные игры Глюбин: Глубина — аркадная буровая, Voxel Mine — воксельный движок на Three.js.">
+<!-- Yandex.RTB -->
+<script>window.yaContextCb=window.yaContextCb||[]</script>
+<script src="https://yandex.ru/ads/system/context.js" async></script>
+<style>
+:root{
+  --bg:#0e1118; --card:#181d29; --card2:#1e2433; --text:#eef1f8;
+  --muted:#9aa5bd; --accent:#ffd23d; --accent2:#5ce1ff; --green:#4CAF50;
+  --border:#2a3347;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit;}
+.container{max-width:1100px;margin:0 auto;padding:0 20px;}
+
+/* language button */
+.lang-btn{
+  position:fixed;top:18px;right:20px;z-index:100;
+  padding:9px 18px;background:#1b2233;border:2px solid var(--accent2);
+  color:var(--accent2);border-radius:8px;cursor:pointer;font-weight:bold;
+  font-size:14px;transition:.2s;
+}
+.lang-btn:hover{background:var(--accent2);color:#0e1118;}
+
+/* header */
+header{
+  text-align:center;padding:80px 20px 60px;position:relative;overflow:hidden;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,210,61,.10),transparent 40%),
+    radial-gradient(circle at 80% 30%,rgba(92,225,255,.10),transparent 40%),
+    linear-gradient(180deg,#171d2c 0%,var(--bg) 100%);
+  border-bottom:1px solid var(--border);
+}
+header::after{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.3;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:32px 32px;
+}
+header h1{
+  font-size:3rem;letter-spacing:3px;margin-bottom:8px;
+  background:linear-gradient(90deg,var(--accent),#ff9f1c);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  position:relative;z-index:1;
+}
+header p{color:var(--muted);font-size:1.15rem;position:relative;z-index:1;}
+.badges{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap;position:relative;z-index:1;}
+.badge{
+  padding:6px 14px;border:1px solid var(--border);border-radius:20px;
+  font-size:.8rem;color:var(--muted);background:rgba(0,0,0,.2);
+}
+
+/* ad */
+.ad-section{
+  margin:30px 0;text-align:center;min-height:90px;background:#0d1220;
+  border:1px solid #222c42;border-radius:10px;display:flex;align-items:center;
+  justify-content:center;overflow:hidden;
+}
+#yandex_rtb_R-A-20492661-1{min-width:100%;}
+
+/* section titles */
+.section-title{
+  font-size:1.6rem;margin:44px 0 22px;padding-left:14px;
+  border-left:4px solid var(--accent);
+}
+
+/* projects grid */
+.projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:26px;}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.5);border-color:var(--accent);}
+.card-img{
+  height:210px;position:relative;display:flex;align-items:center;justify-content:center;
+  font-family:monospace;font-size:2.4rem;letter-spacing:4px;
+}
+.card-img.glubina{
+  background:linear-gradient(180deg,#0a1020,#16283a 40%,#14161c 70%,#2a0a0a);
+}
+.card-img.glubina::before{
+  content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent 0 28px,rgba(92,225,255,.05) 28px 29px),
+             repeating-linear-gradient(90deg,transparent 0 56px,rgba(92,225,255,.05) 56px 57px);
+}
+.card-img.glubina span{
+  color:var(--accent);text-shadow:3px 3px #000,0 0 24px rgba(255,210,61,.5);
+  position:relative;z-index:1;
+}
+.card-img.voxel{
+  background:linear-gradient(180deg,#4a90d9 0%,#87ceeb 40%,#5a9e4f 41%,#3d7a34 100%);
+}
+.card-img.voxel::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(rgba(0,0,0,.1) 2px,transparent 2px) 0 0/24px 24px,
+             linear-gradient(90deg,rgba(0,0,0,.1) 2px,transparent 2px) 0 0/24px 24px;
+}
+.card-img.voxel span{color:#fff;text-shadow:3px 3px rgba(0,0,0,.5);position:relative;z-index:1;}
+.card-img.soon{
+  background:linear-gradient(135deg,#1e2433,#2a3145);color:#4d5875;
+}
+.tag{
+  position:absolute;top:12px;left:12px;padding:4px 10px;border-radius:6px;
+  font-size:.7rem;font-weight:bold;background:rgba(0,0,0,.6);z-index:2;
+}
+.tag.hot{background:var(--accent);color:#111;}
+.tag.new{background:var(--accent2);color:#111;}
+.card-body{padding:22px;flex-grow:1;display:flex;flex-direction:column;}
+.card-body h3{font-size:1.4rem;margin-bottom:8px;}
+.card-body p{color:var(--muted);font-size:.95rem;flex-grow:1;margin-bottom:18px;}
+.features{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;}
+.feature{font-size:.72rem;padding:4px 9px;border:1px solid var(--border);border-radius:5px;color:var(--muted);}
+.btn{
+  display:inline-block;text-align:center;padding:12px 22px;border-radius:8px;
+  font-weight:bold;transition:.2s;
+}
+.btn-primary{background:var(--accent);color:#111;}
+.btn-primary:hover{background:#ffb800;transform:translateY(-2px);}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--muted);}
+.btn-ghost:hover{border-color:var(--accent2);color:var(--accent2);}
+
+/* about */
+.about{
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;margin:50px 0;
+}
+.about-box{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;padding:26px;
+}
+.about-box h3{color:var(--accent2);margin-bottom:10px;}
+.about-box p{color:var(--muted);font-size:.95rem;}
+
+/* video */
+.video-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.video-card{
+  background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;
+}
+.video-thumb{
+  height:180px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#1a2235,#2a3450);font-size:3rem;
+}
+.video-card .body{padding:16px 20px;}
+.video-card .body h4{margin-bottom:6px;}
+.video-card .body p{color:var(--muted);font-size:.85rem;}
+
+/* footer */
+footer{
+  text-align:center;padding:40px 20px;color:var(--muted);
+  border-top:1px solid var(--border);font-size:.9rem;margin-top:60px;
+}
+footer .social{display:flex;gap:16px;justify-content:center;margin-bottom:16px;flex-wrap:wrap;}
+footer .social a{padding:8px 16px;border:1px solid var(--border);border-radius:6px;transition:.2s;}
+footer .social a:hover{border-color:var(--accent);color:var(--accent);}
+
+@media(max-width:700px){
+  header h1{font-size:2rem;}
+  .about,.video-grid{grid-template-columns:1fr;}
+  .container{padding:0 14px;}
+}
+</style>
+</head>
+<body>
+<button class="lang-btn" id="lang-toggle" onclick="toggleLanguage()">EN</button>
+
+<header>
+  <h1 data-ru="Глюбин" data-en="Glubin">Глюбин</h1>
+  <p data-ru="Создаю браузерные игры и экспериментирую с технологиями" data-en="I make browser games and experiment with technology">Создаю браузерные игры и экспериментирую с технологиями</p>
+  <div class="badges">
+    <span class="badge" data-ru="🎮 Браузерные игры" data-en="🎮 Browser games">🎮 Браузерные игры</span>
+    <span class="badge" data-ru="⚡ Без установки" data-en="⚡ No install needed">⚡ Без установки</span>
+    <span class="badge" data-ru="🌍 RU / EN" data-en="🌍 RU / EN">🌍 RU / EN</span>
+  </div>
+</header>
+
+<div class="container">
+  <!-- Yandex.RTB R-A-20492661-1 -->
+  <div class="ad-section">
+    <div id="yandex_rtb_R-A-20492661-1"></div>
+    <script>
+    window.yaContextCb.push(() => {
+      Ya.Context.AdvManager.render({
+        "blockId": "R-A-20492661-1",
+        "renderTo": "yandex_rtb_R-A-20492661-1"
+      })
+    })
+    </script>
+  </div>
+
+  <h2 class="section-title" data-ru="Мои игры" data-en="My games">Мои игры</h2>
+  <div class="projects">
+    <!-- ГЛУБИНА -->
+    <div class="card">
+      <div class="card-img glubina"><span class="tag hot" data-ru="НОВИНКА" data-en="NEW">НОВИНКА</span><span>ГЛУБИНА</span></div>
+      <div class="card-body">
+        <h3 data-ru="Глубина 4.0" data-en="Depth 4.0">Глубина 4.0</h3>
+        <p data-ru="Аркадная буровая с автобуром, комбо, заданиями и достижениями. Бури слой за слоем, собирай руду и ставь рекорды." data-en="Arcade drilling game with auto-drill, combos, quests and achievements. Drill deeper, collect ore and set records.">Аркадная буровая с автобуром, комбо, заданиями и достижениями. Бури слой за слоем, собирай руду и ставь рекорды.</p>
+        <div class="features">
+          <span class="feature" data-ru="Автобур" data-en="Auto-drill">Автобур</span>
+          <span class="feature" data-ru="Комбо x5" data-en="Combo x5">Комбо x5</span>
+          <span class="feature" data-ru="8 достижений" data-en="8 achievements">8 достижений</span>
+          <span class="feature" data-ru="Рекорды" data-en="Leaderboard">Рекорды</span>
+        </div>
+        <a href="игры/глубина/index.html" class="btn btn-primary" target="_blank" data-ru="Играть онлайн" data-en="Play online">Играть онлайн</a>
+      </div>
+    </div>
+
+    <!-- VOXEL MINE -->
+    <div class="card">
+      <div class="card-img voxel"><span class="tag" data-ru="КЛАССИКА" data-en="CLASSIC">КЛАССИКА</span><span>VOXEL MINE</span></div>
+      <div class="card-body">
+        <h3>Voxel Mine</h3>
+        <p data-ru="Собственный воксельный движок на Three.js: генерация пещер, мобы, смена дня и ночи, оптимизация рендера и сохранение в файлы." data-en="My own voxel engine on Three.js: cave generation, mobs, day/night cycle, render optimization and file saving.">Собственный воксельный движок на Three.js: генерация пещер, мобы, смена дня и ночи, оптимизация рендера и сохранение в файлы.</p>
+        <div class="features">
+          <span class="feature" data-ru="Three.js" data-en="Three.js">Three.js</span>
+          <span class="feature" data-ru="Пещеры" data-en="Caves">Пещеры</span>
+          <span class="feature" data-ru="Мобы" data-en="Mobs">Мобы</span>
+          <span class="feature" data-ru="День/ночь" data-en="Day/night">День/ночь</span>
+        </div>
+        <a href="игры/voxel-mine/index.html" class="btn btn-primary" target="_blank" data-ru="Играть онлайн" data-en="Play online">Играть онлайн</a>
+      </div>
+    </div>
+
+    <!-- СКОРО -->
+    <div class="card">
+      <div class="card-img soon"><span data-ru="СКОРО" data-en="COMING SOON">СКОРО</span></div>
+      <div class="card-body">
+        <h3 data-ru="Следующий проект" data-en="Next project">Следующий проект</h3>
+        <p data-ru="Работаю над новой игрой. Подписывайся, чтобы не пропустить релиз." data-en="Working on a new game. Stay tuned for the release.">Работаю над новой игрой. Подписывайся, чтобы не пропустить релиз.</p>
+        <a href="#" class="btn btn-ghost" data-ru="Скоро..." data-en="Coming soon...">Скоро...</a>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="section-title" data-ru="Обо мне" data-en="About me">Обо мне</h2>
+  <div class="about">
+    <div class="about-box">
+      <h3 data-ru="Кто я" data-en="Who I am">Кто я</h3>
+      <p data-ru="Я начинающий разработчик игр. Создаю браузерные проекты на чистом HTML/JavaScript и Three.js. Мне нравится делать игры, в которые хочется играть снова и снова." data-en="I'm an indie game developer. I build browser games with pure HTML/JavaScript and Three.js. I love making games you want to play again and again.">Я начинающий разработчик игр. Создаю браузерные проекты на чистом HTML/JavaScript и Three.js. Мне нравится делать игры, в которые хочется играть снова и снова.</p>
+    </div>
+    <div class="about-box">
+      <h3 data-ru="Как поиграть" data-en="How to play">Как поиграть</h3>
+      <p data-ru="Просто открой игру в браузере — никакой установки. «Глубина» и Voxel Mine работают прямо по ссылке. Все игры бесплатны." data-en="Just open a game in your browser — no installation. Depth and Voxel Mine work right in your browser. All games are free.">Просто открой игру в браузере — никакой установки. «Глубина» и Voxel Mine работают прямо по ссылке. Все игры бесплатны.</p>
+    </div>
+  </div>
+
+  <h2 class="section-title" data-ru="Видео" data-en="Videos">Видео</h2>
+  <div class="video-grid">
+    <div class="video-card">
+      <div class="video-thumb">▶</div>
+      <div class="body">
+        <h4 data-ru="Глубина — геймплей (YouTube)" data-en="Depth — gameplay (YouTube)">Глубина — геймплей (YouTube)</h4>
+        <p data-ru="Полный обзор игры: механики, биомы, достижения." data-en="Full overview: mechanics, biomes, achievements.">Полный обзор игры: механики, биомы, достижения.</p>
+      </div>
+    </div>
+    <div class="video-card">
+      <div class="video-thumb">▶</div>
+      <div class="body">
+        <h4 data-ru="Глубина за 30 секунд (TikTok)" data-en="Depth in 30 seconds (TikTok)">Глубина за 30 секунд (TikTok)</h4>
+        <p data-ru="Короткий и динамичный ролик для соцсетей." data-en="A short and dynamic clip for social media.">Короткий и динамичный ролик для соцсетей.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Нижний рекламный блок убран по просьбе -->
+</div>
+
+<footer>
+  <div class="social">
+    <a href="#" data-ru="YouTube" data-en="YouTube">YouTube</a>
+    <a href="#" data-ru="TikTok" data-en="TikTok">TikTok</a>
+    <a href="#" data-ru="Telegram" data-en="Telegram">Telegram</a>
+  </div>
+  <p data-ru="© 2026 Глюбин. Все права защищены." data-en="© 2026 Glubin. All rights reserved.">© 2026 Глюбин. Все права защищены.</p>
+</footer>
+
+<script>
+let currentLang=localStorage.getItem('siteLang')||'ru';
+function toggleLanguage(){
+  currentLang=currentLang==='ru'?'en':'ru';
+  localStorage.setItem('siteLang',currentLang);
+  applyLanguage(currentLang);
+}
+function applyLanguage(lang){
+  document.querySelectorAll('[data-'+lang+']').forEach(el=>{
+    const v=el.getAttribute('data-'+lang);
+    el.innerHTML=v;
+  });
+  document.getElementById('lang-toggle').textContent=lang==='ru'?'EN':'RU';
+  document.title=(document.querySelector('title').getAttribute('data-'+lang)||document.title);
+  document.documentElement.lang=lang;
+}
+document.addEventListener('DOMContentLoaded',()=>applyLanguage(currentLang));
+</script>
+</body>
+</html>

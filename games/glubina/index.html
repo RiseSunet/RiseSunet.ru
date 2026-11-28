@@ -108,7 +108,7 @@ body.narrow .hint-mobile{display:inline;}
 /* ---------- кнопки управления ---------- */
 .controls{position:absolute;inset:0;z-index:15;pointer-events:none;}
 .controls button{pointer-events:auto;position:absolute;}
-.dpad{position:absolute;left:0;right:0;bottom:40px;display:flex;justify-content:center;gap:12px;pointer-events:none;}
+.dpad{position:absolute;left:0;right:0;bottom:40px;display:flex;justify-content:center;gap:12px;pointer-events:none;z-index:16;}
 .dpad button,.btn-drill,.btn-pause{
   font-family:inherit;color:#dce6ff;background:rgba(18,26,46,.85);
   border:2px solid #435882;border-radius:10px;box-shadow:0 4px 0 #05070c;
@@ -1056,6 +1056,11 @@ function renderLadder(){
   }).join('');
 }
 function startGame(){
+  // полноэкранный режим включается в жесте пользователя (нажатие кнопки старта)
+  if(isMobile&&fullscreenOn&&!document.fullscreenElement){
+    fsArmed=true;
+    document.documentElement.requestFullscreen?.().catch(()=>{});
+  }
   for(const k in input)input[k]=false;
   input.drilling=false;pointerActive=false;
   player.x=W/2;player.vx=0;
@@ -1279,16 +1284,21 @@ $('set-device').textContent=isMobile?'ТЕЛЕФОН':'КОМПЬЮТЕР';
 $('btn-settings').onclick=()=>{sfx('menu');openSettings();};
 $('btn-back-settings').onclick=()=>{sfx('menu');showScreen('screen-menu');};
 
-// строки настроек — кликабельные
-$('row-sound').onclick=()=>{
+// строки настроек — кликабельные (и клик, и тач, т.к. touch-action:none гасит click на div)
+function bindRow(id,fn){
+  const el=$(id);
+  el.addEventListener('click',e=>{e.preventDefault();fn();});
+  el.addEventListener('touchstart',e=>{e.preventDefault();fn();},{passive:false});
+}
+bindRow('row-sound',()=>{
   soundOn=!soundOn;save(K.sound,soundOn);
   if(soundOn){ensureAudio();startMusic();}else stopMusic();
   $('set-sound').textContent=soundOn?'ВКЛ':'ВЫКЛ';
   $('btn-sound').textContent='ЗВУК: '+(soundOn?'ВКЛ':'ВЫКЛ');
   sfx('menu');
-};
-$('row-auto').onclick=()=>{ toggleAuto(); $('set-auto').textContent=autoDrill?'ВКЛ':'ВЫКЛ'; };
-$('row-fullscreen').onclick=()=>{ toggleFullscreen(); $('set-fullscreen').textContent=fullscreenOn?'ВКЛ':'ВЫКЛ'; };
+});
+bindRow('row-auto',()=>{ toggleAuto(); $('set-auto').textContent=autoDrill?'ВКЛ':'ВЫКЛ'; });
+bindRow('row-fullscreen',()=>{ toggleFullscreen(); $('set-fullscreen').textContent=fullscreenOn?'ВКЛ':'ВЫКЛ'; });
 
 function toggleFullscreen(){
   if(!isMobile){toast('На компьютере полноэкранный режим не нужен');return;}
